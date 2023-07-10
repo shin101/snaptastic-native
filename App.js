@@ -1,49 +1,45 @@
-import * as SplashScreen from "expo-splash-screen";
-import { StatusBar } from "expo-status-bar";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
-import * as Font from "expo-font";
 import { Asset } from "expo-asset";
-import { StyleSheet, Text, View } from "react-native";
+import * as Font from "expo-font";
+import LoggedOutNav from "./navigators/LoggedOutNav";
+import { NavigationContainer } from "@react-navigation/native";
+// import * as SplashScreen from "expo-splash-screen";
 
-SplashScreen.preventAutoHideAsync();
+// SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [loading, setLoading] = useState(true);
+  const onFinish = () => {
+    setLoading(false);
+  };
+
+  const preload = async () => {
+    try {
+      await Font.loadAsync(Ionicons.font);
+
+      const imagesToLoad = [require("./assets/logo-black.png")];
+      const imagePromises = imagesToLoad.map((image) => Asset.loadAsync(image));
+
+      await Promise.all(imagePromises);
+    } catch (error) {
+      console.warn(error);
+    } finally {
+      onFinish();
+    }
+  };
 
   useEffect(() => {
-    const preload = async () => {
-      try {
-        
-        await Font.loadAsync({ Ionicons: Ionicons.font });
-        const imageToLoad = Asset.fromModule(require("./assets/logo-black.png"));
-        await imageToLoad.downloadAsync();
-
-        await SplashScreen.hideAsync();
-        setLoading(false);
-      } catch (error) {
-        console.warn(error);
-      }
-    };
     preload();
   }, []);
 
   if (loading) {
     return null;
   }
+
   return (
-    <View style={styles.container}>
-      <Text>Hihihihi Bacon</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <LoggedOutNav />
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
