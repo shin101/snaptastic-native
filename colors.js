@@ -1,1 +1,1 @@
-export const colors = { blue: "#0095F6" };
+export const colors = {purple: "#B465F7" };
