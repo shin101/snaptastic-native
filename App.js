@@ -3,12 +3,14 @@ import { Ionicons } from "@expo/vector-icons";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import LoggedOutNav from "./navigators/LoggedOutNav";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, ThemeProvider } from "@react-navigation/native";
+
 // import * as SplashScreen from "expo-splash-screen";
 
 // SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+  // const colorScheme = Appearance.getColorScheme();
   const [loading, setLoading] = useState(true);
   const onFinish = () => {
     setLoading(false);
