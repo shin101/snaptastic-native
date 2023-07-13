@@ -20,7 +20,7 @@ export default function App() {
     try {
       await Font.loadAsync(Ionicons.font);
 
-      const imagesToLoad = [require("./assets/logo-black.png")];
+      const imagesToLoad = [require("./assets/logo-white.png")];
       const imagePromises = imagesToLoad.map((image) => Asset.loadAsync(image));
 
       await Promise.all(imagePromises);
