@@ -4,7 +4,7 @@ import styled from "styled-components/native";
 
 const Button = styled.TouchableOpacity`
   background-color: ${colors.purple};
-  padding: 13px 10px;
+  padding: 15px 10px;
   margin-top: 20px;
   border-radius: 5px;
   width: 100%;
