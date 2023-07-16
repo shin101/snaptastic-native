@@ -74,7 +74,7 @@ export default function CreateAccount() {
         onChangeText={(text) => setValue("password", text)}
         onSubmitEditing={handleSubmit(onValid)}
       />
-      <AuthButton text="Create Account" onPress={handleSubmit(onValid)} />
+      <AuthButton text="Create Account" disabled={false} onPress={handleSubmit(onValid)} />
     </AuthLayout>
   );
 }

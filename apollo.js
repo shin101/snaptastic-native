@@ -1,8 +1,10 @@
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloClient, InMemoryCache, makeVar } from "@apollo/client";
+
+export const isLoggedInVar = makeVar(false);
 
 const client = new ApolloClient({
-  // uri created with local tunnel
-  uri: "https://snaptastic.loca.lt/graphql",
+  // create uri with local tunnel
+  uri: "http://localhost:4000/graphql",
   cache: new InMemoryCache(),
 });
 
