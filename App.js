@@ -4,7 +4,8 @@ import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import LoggedOutNav from "./navigators/LoggedOutNav";
 import { NavigationContainer } from "@react-navigation/native";
-
+import { ApolloProvider } from "@apollo/client";
+import client from "./apollo";
 
 // import * as SplashScreen from "expo-splash-screen";
 
@@ -41,8 +42,10 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <LoggedOutNav />
-    </NavigationContainer>
+    <ApolloProvider client={client}>
+      <NavigationContainer>
+        <LoggedOutNav />
+      </NavigationContainer>
+    </ApolloProvider>
   );
 }
