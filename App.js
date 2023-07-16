@@ -3,7 +3,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import LoggedOutNav from "./navigators/LoggedOutNav";
-import { NavigationContainer, ThemeProvider } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
+
 
 // import * as SplashScreen from "expo-splash-screen";
 
