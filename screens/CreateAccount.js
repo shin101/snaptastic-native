@@ -4,9 +4,44 @@ import AuthButton from "../components/auth/AuthButton";
 
 import { TextInput } from "../components/auth/AuthShared";
 import { useForm } from "react-hook-form";
+import { gql, useMutation } from "@apollo/client";
 
-export default function CreateAccount() {
-  const { register, handleSubmit, setValue } = useForm();
+const CREATE_ACCOUNT_MUTATION = gql`
+  mutation createAccount(
+    $firstName: String!
+    $lastName: String
+    $username: String!
+    $email: String!
+    $password: String!
+  ) {
+    createAccount(
+      firstName: $firstName
+      lastName: $lastName
+      username: $username
+      email: $email
+      password: $password
+    ) {
+      ok
+      error
+    }
+  }
+`;
+
+export default function CreateAccount({ navigation }) {
+  const { register, handleSubmit, setValue, getValues } = useForm();
+  const onCompleted = (data) => {
+    const {
+      createAccount: { ok },
+    } = data;
+    const { username, password } = getValues();
+    if (ok) {
+      navigation.navigate("LogIn", { username, password });
+    }
+  };
+  const [createAccountMutation, { loading }] = useMutation(
+    CREATE_ACCOUNT_MUTATION,
+    { onCompleted }
+  );
   const lastNameRef = useRef();
   const usernameRef = useRef();
   const emailRef = useRef();
@@ -15,7 +50,9 @@ export default function CreateAccount() {
     nextOne?.current?.focus();
   };
   const onValid = (data) => {
-    console.log(data);
+    if (!loading) {
+      createAccountMutation({ variables: { ...data } });
+    }
   };
 
   useEffect(() => {
@@ -51,7 +88,7 @@ export default function CreateAccount() {
         onSubmitEditing={() => onNext(emailRef)}
         placeholderTextColor={"rgba(255,255,255,0.6)"}
         onChangeText={(text) => setValue("username", text)}
-        autoCapitalize={false}
+        autoCapitalize="none"
       />
       <TextInput
         ref={emailRef}
@@ -61,7 +98,7 @@ export default function CreateAccount() {
         onSubmitEditing={() => onNext(passwordRef)}
         placeholderTextColor={"rgba(255,255,255,0.6)"}
         onChangeText={(text) => setValue("email", text)}
-        autoCapitalize={false}
+        autoCapitalize="none"
       />
       <TextInput
         ref={passwordRef}
@@ -74,7 +111,11 @@ export default function CreateAccount() {
         onChangeText={(text) => setValue("password", text)}
         onSubmitEditing={handleSubmit(onValid)}
       />
-      <AuthButton text="Create Account" disabled={false} onPress={handleSubmit(onValid)} />
+      <AuthButton
+        text="Create Account"
+        disabled={false}
+        onPress={handleSubmit(onValid)}
+      />
     </AuthLayout>
   );
 }

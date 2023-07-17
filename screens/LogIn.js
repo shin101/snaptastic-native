@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import AuthButton from "../components/auth/AuthButton";
 import { gql, useMutation } from "@apollo/client";
 import { isLoggedInVar } from "../apollo";
+// import { useNavigation } from "@react-navigation/native";
 
 const LOGIN_MUTATION = gql`
   mutation login($username: String!, $password: String!) {
@@ -17,17 +18,24 @@ const LOGIN_MUTATION = gql`
   }
 `;
 
-export default function LogIn() {
-  const { register, handleSubmit, setValue, watch } = useForm();
+export default function LogIn({ route: { params } }) {
+  const { register, handleSubmit, setValue, watch } = useForm({
+    defaultValues: { password: params?.password, username: params?.username },
+  });
   const passwordRef = useRef();
+  // const navigation = useNavigation();
   const onCompleted = (data) => {
+    console.log("HIIII");
     const {
       login: { ok, token },
     } = data;
+    if (!ok) {
+      console.log("not ok");
+    }
     if (ok) {
-      console.log("SUCCESSSSSS")
-      alert('SUCCESS')
       isLoggedInVar(true);
+      console.log("yes ok");
+      // navigation.navigate("LoggedInNav");
     }
   };
   const [logInMutation, { loading }] = useMutation(LOGIN_MUTATION, {
@@ -36,9 +44,9 @@ export default function LogIn() {
   const onNext = (nextOne) => {
     nextOne?.current?.focus();
   };
-  const onValid = (data) => {
+  const onValid = async (data) => {
     if (!loading) {
-      logInMutation({ variables: { ...data } });
+      await logInMutation({ variables: { ...data } });
     }
   };
   useEffect(() => {
@@ -49,14 +57,16 @@ export default function LogIn() {
   return (
     <AuthLayout>
       <TextInput
+        value={watch("username")}
         placeholder="Username"
         returnKeyType="next"
-        autoCapitalize={false}
+        autoCapitalize="none"
         placeholderTextColor={"rgba(255,255,255,0.6)"}
         onSubmitEditing={() => onNext(passwordRef)}
         onChangeText={(text) => setValue("username", text)}
       />
       <TextInput
+        value={watch("password")}
         ref={passwordRef}
         placeholder="Password"
         secureTextEntry

@@ -6,19 +6,6 @@ import AuthLayout from "../components/auth/AuthLayout";
 import AuthButton from "../components/auth/AuthButton";
 
 
-const Container = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  background-color: black;
-  padding: 0px 40px;
-`;
-
-const Logo = styled.Image`
-  max-width: 70%;
-  height: 100px;
-`;
-
 const LoginLink = styled.Text`
   color: ${colors.purple};
   font-weight: 600;
@@ -27,7 +14,8 @@ const LoginLink = styled.Text`
 
 export default function Welcome({ navigation }) {
   const goToCreateAccount = () => navigation.navigate("CreateAccount");
-  const goToLogIn = () => navigation.navigate("LogIn");
+  const goToLogIn = () =>
+    navigation.navigate("LogIn");
   return (
     <AuthLayout>
       <AuthButton
