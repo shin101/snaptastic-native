@@ -5,42 +5,39 @@ import * as Font from "expo-font";
 import LoggedOutNav from "./navigators/LoggedOutNav";
 import { NavigationContainer } from "@react-navigation/native";
 import { ApolloProvider, useReactiveVar } from "@apollo/client";
-import client, { isLoggedInVar } from "./apollo";
+import client, { isLoggedInVar, tokenVar } from "./apollo";
 import LoggedInNav from "./navigators/LoggedInNav";
-
-// import * as SplashScreen from "expo-splash-screen";
-
-// SplashScreen.preventAutoHideAsync();
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App() {
-  // const colorScheme = Appearance.getColorScheme();
   const [loading, setLoading] = useState(true);
-  const onFinish = () => {
-    setLoading(false);
-  };
+  const onFinish = () => setLoading(false);
   const isLoggedIn = useReactiveVar(isLoggedInVar);
 
+  const preloadAssets = async () => {
+    const fontsToLoad = [Ionicons.font];
+    const fontPromises = fontsToLoad.map((font) => Font.loadAsync(font));
+    const imagesToLoad = [require("./assets/logo-white.png")];
+    const imagePromises = imagesToLoad.map((image) => Asset.loadAsync(image));
+    return Promise.all([...fontPromises, ...imagePromises]);
+  };
+
   const preload = async () => {
-    try {
-      await Font.loadAsync(Ionicons.font);
-
-      const imagesToLoad = [require("./assets/logo-white.png")];
-      const imagePromises = imagesToLoad.map((image) => Asset.loadAsync(image));
-
-      await Promise.all(imagePromises);
-    } catch (error) {
-      console.warn(error);
-    } finally {
-      onFinish();
+    const token = await AsyncStorage.getItem("token");
+    console.log('token is', token)
+    if (token) {
+      isLoggedInVar(true);
+      tokenVar(token);
     }
+    return preloadAssets();
   };
 
   useEffect(() => {
-    preload();
-  }, []);
+    preload().then(onFinish); 
+  }, []); 
 
   if (loading) {
-    return null;
+    return null; 
   }
 
   return (

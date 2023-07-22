@@ -5,7 +5,7 @@ import { TextInput } from "../components/auth/AuthShared";
 import { useForm } from "react-hook-form";
 import AuthButton from "../components/auth/AuthButton";
 import { gql, useMutation } from "@apollo/client";
-import { isLoggedInVar } from "../apollo";
+import { isLoggedInVar, logUserIn } from "../apollo";
 // import { useNavigation } from "@react-navigation/native";
 
 const LOGIN_MUTATION = gql`
@@ -24,7 +24,7 @@ export default function LogIn({ route: { params } }) {
   });
   const passwordRef = useRef();
   // const navigation = useNavigation();
-  const onCompleted = (data) => {
+  const onCompleted = async (data) => {
     console.log("HIIII");
     const {
       login: { ok, token },
@@ -33,9 +33,7 @@ export default function LogIn({ route: { params } }) {
       console.log("not ok");
     }
     if (ok) {
-      isLoggedInVar(true);
-      console.log("yes ok");
-      // navigation.navigate("LoggedInNav");
+      await logUserIn(token);
     }
   };
   const [logInMutation, { loading }] = useMutation(LOGIN_MUTATION, {
