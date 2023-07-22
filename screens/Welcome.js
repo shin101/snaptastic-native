@@ -5,7 +5,6 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import AuthLayout from "../components/auth/AuthLayout";
 import AuthButton from "../components/auth/AuthButton";
 
-
 const LoginLink = styled.Text`
   color: ${colors.purple};
   font-weight: 600;
@@ -14,8 +13,7 @@ const LoginLink = styled.Text`
 
 export default function Welcome({ navigation }) {
   const goToCreateAccount = () => navigation.navigate("CreateAccount");
-  const goToLogIn = () =>
-    navigation.navigate("LogIn");
+  const goToLogIn = () => navigation.navigate("LogIn");
   return (
     <AuthLayout>
       <AuthButton

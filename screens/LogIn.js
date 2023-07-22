@@ -25,7 +25,6 @@ export default function LogIn({ route: { params } }) {
   const passwordRef = useRef();
   // const navigation = useNavigation();
   const onCompleted = async (data) => {
-    console.log("HIIII");
     const {
       login: { ok, token },
     } = data;

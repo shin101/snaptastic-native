@@ -24,7 +24,6 @@ export default function App() {
 
   const preload = async () => {
     const token = await AsyncStorage.getItem("token");
-    console.log('token is', token)
     if (token) {
       isLoggedInVar(true);
       tokenVar(token);
