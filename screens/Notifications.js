@@ -15,3 +15,7 @@ export default function Notifications() {
     </View>
   );
 }
+
+
+// Notifications is similar to photo component. See #16.6
+// https://docs.expo.io/versions/latest/sdk/notifications/
