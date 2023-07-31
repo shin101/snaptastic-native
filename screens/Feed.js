@@ -1,9 +1,10 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { ActivityIndicator, FlatList, Text, View } from "react-native";
 import { gql, useQuery } from "@apollo/client";
 import { PHOTO_FRAGMENT, COMMENT_FRAGMENT } from "../fragments";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { logUserOut } from "../apollo";
+import ScreenLayout from "../components/ScreenLayout";
 
 const FEED_QUERY = gql`
   query seeFeed {
@@ -25,25 +26,23 @@ const FEED_QUERY = gql`
   ${COMMENT_FRAGMENT}
 `;
 
-export default function Feed({ navigation }) {
-  const { data } = useQuery(FEED_QUERY);
-  console.log(data);
-  return (
-    <View
-      style={{
-        backgroundColor: "black",
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <TouchableOpacity onPress={() => logUserOut()}>
-        <Text style={{ color: "white" }}>LogOut</Text>
-      </TouchableOpacity>
+export default function Feed() {
+  const { data, loading } = useQuery(FEED_QUERY);
+  const renderPhoto = ({ item: photo }) => {
+    return (
+      <View style={{ flex: 1 }}>
+        <Text style={{ color: "white" }}>{photo.caption}</Text>
+      </View>
+    );
+  };
 
-      <TouchableOpacity>
-        <Text style={{ color: "white" }}>Feed</Text>
-      </TouchableOpacity>
-    </View>
+  return (
+    <ScreenLayout loading={loading}>
+      <FlatList
+        data={data?.seeFeed}
+        keyExtractor={(photo) => "" + photo.id}
+        renderItem={renderPhoto}
+      />
+    </ScreenLayout>
   );
 }

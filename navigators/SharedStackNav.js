@@ -33,7 +33,7 @@ export default function SharedStackNav({ screenName }) {
             headerTitle: () => (
               <Image
                 style={{ maxHeight: 20, maxWidth: 200 }}
-                resizeMode="contain center"
+                resizeMode="contain"
                 source={require("../assets/logo-white.png")}
               />
             ),
