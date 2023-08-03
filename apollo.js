@@ -5,6 +5,7 @@ import {
   makeVar,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import { offsetLimitPagination } from "@apollo/client/utilities";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const isLoggedInVar = makeVar(false);
@@ -17,7 +18,7 @@ export const logUserIn = async (token) => {
   await AsyncStorage.setItem(TOKEN, token);
   isLoggedInVar(true);
   tokenVar(token);
-  console.log('token is, ', token)
+  console.log("token is, ", token);
 };
 
 export const logUserOut = async () => {
@@ -41,7 +42,15 @@ const client = new ApolloClient({
   // create uri with local tunnel
   // uri: "http://localhost:4000/graphql",
   link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Query: {
+        fields: {
+          seeFeed: offsetLimitPagination(),
+        },
+      },
+    },
+  }),
 });
 
 export default client;

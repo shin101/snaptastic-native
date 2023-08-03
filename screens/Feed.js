@@ -27,6 +27,7 @@ const FEED_QUERY = gql`
 `;
 
 export default function Feed() {
+  const [refreshing, setRefreshing] = useState(false);
   const { data, loading, refetch, fetchMore } = useQuery(FEED_QUERY, {
     variables: { offset: 0 },
   });
@@ -40,11 +41,10 @@ export default function Feed() {
     setRefreshing(false);
   };
 
-  const [refreshing, setRefreshing] = useState(false);
   return (
     <ScreenLayout loading={loading}>
       <FlatList
-        onEndReachedThreshold={0}
+        onEndReachedThreshold={0.02}
         onEndReached={() =>
           fetchMore({ variables: { offset: data?.seeFeed?.length } })
         }
