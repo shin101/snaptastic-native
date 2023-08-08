@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
+import { colors } from "../colors";
 
 const Column = styled.View`
   flex-direction: row;
@@ -17,8 +18,14 @@ const Username = styled.Text`
   color: white;
 `;
 
-const Wrapper = styled.View``;
-const FollowBtn = styled.TouchableOpacity``;
+const Wrapper = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+const FollowBtn = styled.TouchableOpacity`
+  background-color: ${colors.purple};
+  justify-content: center;
+`;
 const FollowBtnText = styled.Text``;
 
 export default function UserRow({ avatar, username, isFollowing, isMe }) {
