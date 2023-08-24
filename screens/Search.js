@@ -56,7 +56,7 @@ export default function Search({ navigation }) {
       placeholder="Search photos"
       autoCapitalize="none"
       returnKeyLabel="Search"
-      returnKeyType="Search"
+      returnKeyType="search"
       autoCorrect={false}
       onChangeText={(text) => setValue("keyword", text)}
       onSubmitEditing={handleSubmit(onValid)}
@@ -69,7 +69,7 @@ export default function Search({ navigation }) {
   }, []);
 
   const renderItem = ({ item: photo }) => (
-    <TouchableOpacity>
+    <TouchableOpacity >
       <Image
         source={{ uri: photo.file }}
         style={{ width: width / numColumns, height: 100 }}
