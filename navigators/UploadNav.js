@@ -33,7 +33,7 @@ export default function UploadNav() {
             }}
           >
             <Stack.Screen
-              name="Select"
+              name="SelectPhoto"
               options={{ title: "Choose a photo" }}
               component={SelectPhoto}
             />
