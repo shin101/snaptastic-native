@@ -21,7 +21,6 @@ const Logo = styled.Image`
   width: 100%;
   height: 100px;
   margin-bottom: 20px;
-
 `;
 
 export default function AuthLayout({ children }) {
@@ -35,15 +34,15 @@ export default function AuthLayout({ children }) {
       disabled={Platform.OS === "web"}
     >
       <Container>
+        <Logo
+          resizeMode="contain"
+          source={require("../../assets/logo-white.png")}
+        />
         <KeyboardAvoidingView
           style={{ width: "100%" }}
           behavior="position"
           keyboardVerticalOffset={Platform.OS === "ios" ? 50 : 0}
         >
-          <Logo
-            resizeMode="contain"
-            source={require("../../assets/logo-white.png")}
-          />
           {children}
         </KeyboardAvoidingView>
       </Container>
