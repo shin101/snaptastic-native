@@ -9,8 +9,9 @@ import {
 } from "react-native";
 
 const Container = styled.View`
-  flex: 1;
   align-items: center;
+  display: flex;
+  flex: 1;
   justify-content: center;
   background-color: black;
   padding: 0px 40px;
@@ -18,7 +19,6 @@ const Container = styled.View`
 
 const Logo = styled.Image`
   max-width: 70%;
-  width: 100%;
   height: 100px;
   margin-bottom: 20px;
 `;
@@ -27,9 +27,9 @@ export default function AuthLayout({ children }) {
   const dismissKeyboard = () => {
     Keyboard.dismiss();
   };
+
   return (
     <TouchableWithoutFeedback
-      style={{ flex: 1 }}
       onPress={dismissKeyboard}
       disabled={Platform.OS === "web"}
     >

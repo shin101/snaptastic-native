@@ -8,7 +8,6 @@ import AuthButton from "../components/auth/AuthButton";
 const LoginLink = styled.Text`
   color: ${colors.purple};
   font-weight: 600;
-  margin-top: 20px;
 `;
 
 export default function Welcome({ navigation }) {
@@ -21,7 +20,14 @@ export default function Welcome({ navigation }) {
         disabled={false}
         onPress={goToCreateAccount}
       />
-      <TouchableOpacity onPress={goToLogIn}>
+      <TouchableOpacity
+        style={{
+          alignItems: "center",
+          justifyContent: "center",
+          paddingVertical: 16,
+        }}
+        onPress={goToLogIn}
+      >
         <LoginLink>Log In</LoginLink>
       </TouchableOpacity>
     </AuthLayout>
