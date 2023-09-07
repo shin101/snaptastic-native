@@ -29,6 +29,7 @@ export default function LogIn({ route: { params } }) {
       login: { ok, token },
     } = data;
     if (!ok) {
+      // show error message here later
       console.log("not ok");
     }
     if (ok) {

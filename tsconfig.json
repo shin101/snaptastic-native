@@ -11,6 +11,6 @@
   "include": [
     "**/*.tsx",
     "**/*.ts"
-  ],
+, "components/auth/AuthShared.js"  ],
   "extends": "expo/tsconfig.base"
 }

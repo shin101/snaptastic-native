@@ -18,7 +18,6 @@ export const logUserIn = async (token) => {
   await AsyncStorage.setItem(TOKEN, token);
   isLoggedInVar(true);
   tokenVar(token);
-  console.log("token is, ", token);
 };
 
 export const logUserOut = async () => {
