@@ -11,7 +11,7 @@ Social media app built with React, React Native, TypeScript, GraphQL, Apollo, an
 Demo of Login page along with dark mode feature
 
 <div style="text-align: center;">
-<img src="https://github.com/shin101/snaptastic-web/blob/main/public/images/Login.gif?raw=true" alt="Login Demo" width="300" height="350" />
+<img src="https://github.com/shin101/snaptastic-web/blob/main/public/images/Login.gif?raw=true" alt="Login Demo"  />
 </div>
 
 ## Mobile App
@@ -19,7 +19,7 @@ Demo of Login page along with dark mode feature
 Demo of sign up & log in page
 
 <div style="text-align: center;">
-<img src="https://github.com/shin101/snaptastic-web/blob/main/public/images/Login-app.gif?raw=true" alt="Login Demo" width="300" height="380" />
+<img src="https://github.com/shin101/snaptastic-web/blob/main/public/images/Login-app.gif?raw=true" alt="Login Demo"  />
 </div>
 
 ## Features
@@ -86,9 +86,9 @@ Demo of sign up & log in page
 
 ### App
 
-- React Native
-- Expo
-- Typescript (Migration in progress..)
-- Apollo Client
-- Styled Components
-- GraphQL
+- `React Native`
+- `Expo`
+- `Typescript (Migration in progress..)`
+- `Apollo Client`
+- `Styled Components`
+- `GraphQL`
