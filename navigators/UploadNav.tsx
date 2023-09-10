@@ -24,6 +24,7 @@ export default function UploadNav() {
         {() => (
           <Stack.Navigator
             screenOptions={{
+
               headerTintColor: "white",
               headerBackTitleVisible: false,
               headerBackImage: ({ tintColor }) => (
