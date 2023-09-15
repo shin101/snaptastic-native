@@ -62,7 +62,7 @@ export default function Feed({ navigation }) {
         }
         refreshing={refreshing}
         onRefresh={refresh}
-        sytle={{ width: "100%" }}
+        style={{ width: "100%" }}
         showsVerticalScrollIndicator={false}
         data={data?.seeFeed}
         keyExtractor={(photo) => "" + photo.id}

@@ -17,6 +17,7 @@ const TOGGLE_LIKE_MUTATION = gql`
 
 const Container = styled.View``;
 const Header = styled.TouchableOpacity`
+  margin-top: 10px;
   padding: 10px;
   flex-direction: row;
   align-items: center;
@@ -119,7 +120,7 @@ export default function Photo({ id, user, file, isLiked, likes, caption }) {
         <Username>{user.username}</Username>
       </Header>
       <File
-        resizeMode="contain"
+        resizeMode="cover"
         style={{ width, height: imageHeight }}
         source={{ uri: file }}
       />
